@@ -12,7 +12,7 @@ export default function TaskManager({ user }) {
   }, []);
 
   const fetchTasks = async () => {
-    const res = await fetch('http://localhost:5000/api/tasks');
+    const res = await fetch('/api/tasks');
     const data = await res.json();
     setTasks(data);
   };
@@ -21,7 +21,7 @@ export default function TaskManager({ user }) {
     e.preventDefault();
     if (!title || !dueDate) return;
 
-    await fetch('http://localhost:5000/api/tasks', {
+    await fetch('/api/tasks', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -40,7 +40,7 @@ export default function TaskManager({ user }) {
 
   const toggleStatus = async (id, currentStatus) => {
     const status = currentStatus === 'done' ? 'pending' : 'done';
-    await fetch(`http://localhost:5000/api/tasks/${id}/toggle`, {
+    await fetch(`/api/tasks/${id}/toggle`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status })
@@ -49,7 +49,7 @@ export default function TaskManager({ user }) {
   };
 
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/api/tasks/${id}`, { method: 'DELETE' });
+    await fetch(`/api/tasks/${id}`, { method: 'DELETE' });
     fetchTasks();
   };
 
