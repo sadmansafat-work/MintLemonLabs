@@ -19,7 +19,7 @@ export default function ChatArea({ activeChannel, user }) {
 
   const fetchMessages = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/channels/${activeChannel.id}/messages`);
+      const res = await fetch(`/api/channels/${activeChannel.id}/messages`);
       const data = await res.json();
       setMessages(data);
     } catch (e) {
@@ -38,7 +38,7 @@ export default function ChatArea({ activeChannel, user }) {
     body.append('content', text);
     if (file) body.append('file', file);
 
-    await fetch('http://localhost:5000/api/messages', {
+     await fetch('/api/messages', {
       method: 'POST',
       body
     });
